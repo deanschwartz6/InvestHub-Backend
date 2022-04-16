@@ -5,7 +5,7 @@ const app = express();
 
 const sayHello = (req, res, next) => {
     console.log(req.query);
-    const name = req.query.name;
+    const {name} = req.query;
     const content = name ? `Hello, ${name}!` : "Hello!";
     res.send(content);
 };
@@ -45,6 +45,30 @@ app.get('/states/:abbreviation', (req, res, next) => {
         //send validated abbreviation
         res.send(`${abbreviation} is a nice state, I'd like to visit.`);
     }
+});
+
+// application level middleware to vaidate birth year 
+const birthYearValidation = (req, res, next) => {
+    //store year from params
+    const year = req.params.year;
+    //validate year character length and not in future
+    if(year.length !== 4 || Number(year) > 2023){
+        //call error handler with provided error
+        next('Birth year is invalid.');
+    } else {
+        //run the next middleware
+        next();
+    }
+}
+
+//validation example
+app.get('/birthyear/:year', birthYearValidation, (req, res, next) => {
+    res.send(`I wish I was born in ${req.params.year}!`);
+});
+
+//error handling if there is no matching route
+app.use((req, res, next) => {
+    res.send('That route could not be found.');
 });
 
 // error handler
