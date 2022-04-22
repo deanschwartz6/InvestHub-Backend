@@ -5,7 +5,7 @@ const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 async function list(req, res) {
     const data = req.body;
     const response = await service.list(data.email);
-    res.json({data: { users: response } });
+    res.json({data: response });
 }
 
 async function create(req, res){

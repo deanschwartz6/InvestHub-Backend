@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const cors = require("cors");
 
 const loginRouter = require('./login/login.router');
-// const companiesRouter = require('./companies/companies.router');
+const companiesRouter = require('./companies/companies.router');
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/logins", loginRouter);
-// app.use("/companies", companiesRouter);
+app.use("/companies", companiesRouter);
 
 
 module.exports = app;

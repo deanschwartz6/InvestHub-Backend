@@ -2,12 +2,7 @@ const knex = require('../db/connection');
 
 const tableName = "logins";
 
-function list(email){
-    if(email){
-        return knex(tableName)
-            .select("*")
-            .where('email', 'like', `${email}%`);
-    }
+function list(){
     return knex(tableName)
         .select("*");
 }
