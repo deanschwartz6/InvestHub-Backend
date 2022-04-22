@@ -57,5 +57,9 @@
 #### Install cors with ``` npm install cors ```
 #### Use by reqiring in app.js and using it before ``` app.use(express()); ```
 
+### Deployment
+
+#### Make sure you set the config var to your database url
+
 
 
